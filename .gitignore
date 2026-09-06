@@ -1,0 +1,26 @@
+# ComfyUI 原始碼由 setup.ps1 clone，不進版控（含 models / .venv / output 等大檔）
+ComfyUI/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 生成輸出與圖片（含個人照片，勿上傳）
+*.mp4
+*.png
+*.jpg
+*.jpeg
+*.webp
+output/
+
+# 模型權重（絕不進 git，太大且 GitHub 限單檔 100MB）
+*.safetensors
+*.ckpt
+*.pt
+*.bin
+*.gguf
+
+# 系統
+.DS_Store
+Thumbs.db

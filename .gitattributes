@@ -1,0 +1,5 @@
+# 確保 Unix 腳本使用 LF，避免從 Windows 提交後在 Linux/Mac 無法執行
+*.sh text eol=lf
+*.py text eol=lf
+# Windows 批次檔維持 CRLF
+*.bat text eol=crlf
