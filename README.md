@@ -67,6 +67,15 @@ chmod +x setup.sh start.sh
 
 策略：先用小尺寸短秒數多抽種子挑構圖，滿意再拉高解析度／時長重生成。
 
+### 省時工作流：低解析度生成 → 放大
+
+12GB 顯存直接跑高解析度很慢（0.7MP 約 15 分鐘）。建議改成：**先用 0.2MP 快速生成（約 2 分鐘）挑出滿意的，再用放大工作流程拉高清**（約 3 分鐘），總時間更短、畫質也好。
+
+1. 需要放大模型：下載 [RealESRGAN_x4plus.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth) 放到 `ComfyUI/models/upscale_models/`
+2. 把要放大的影片放到 `ComfyUI/input/`
+3. 開啟工作流程 **影片放大_upscale_2x**，在 `LoadVideo` 選你的影片，按執行
+4. 流程：讀入影片 → 拆畫格＋音訊 → RealESRGAN 4x → 縮回 2x（`ImageScaleBy` 的 `scale_by` 改 1.0 可得完整 4x）→ 合回音訊 → 存檔
+
 ---
 
 ## 模型清單（download_models.py 會抓，來源 HuggingFace `Comfy-Org/MiniMax-H3`）
@@ -94,7 +103,8 @@ minmaxm3/
 ├── start.bat             # Windows 啟動
 ├── start.sh              # Linux/macOS 啟動
 ├── workflows/
-│   └── 烽火邊關_H3_t2v.json   # 內建範例工作流程
+│   ├── 烽火邊關_H3_t2v.json      # 文生影片範例
+│   └── 影片放大_upscale_2x.json  # 影片放大範例（RealESRGAN 2x）
 └── ComfyUI/              # (git 忽略) 由 setup 腳本產生
 ```
 
