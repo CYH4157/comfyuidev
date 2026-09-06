@@ -78,6 +78,19 @@ chmod +x setup.sh start.sh
 
 ---
 
+## 範例工作流程（workflows/）
+
+放在 `workflows/`，`setup.ps1`/`setup.sh` 會自動複製進 ComfyUI；在左側「工作流程」清單即可開啟。
+
+| 工作流程 | 用途 | 需要的模型 |
+|---|---|---|
+| 烽火邊關_H3_t2v | 文生影片（打字生成） | 已含（fl2va）|
+| 圖生影片_i2v | 圖生影片（一張照片動起來，例如寵物）| 已含（fl2va）|
+| 影片接續生成_i2v_continuation | 接續／延長已生成的影片 | 已含（fl2va）|
+| 影片放大_upscale_2x | RealESRGAN 放大（見上一節）| RealESRGAN_x4plus.pth |
+
+> **進階（需另下載約 21GB `ref2va` 模型）**：官方另有「參考生影片 r2v」「多幀參考 multiframe」模板，可用參考圖控制角色／主體。需要的話下載 `diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors` 到 `ComfyUI/models/diffusion_models/`，再從「範本」搜尋 MiniMax H3 開啟對應模板。
+
 ## 模型清單（download_models.py 會抓，來源 HuggingFace `Comfy-Org/MiniMax-H3`）
 
 | 檔案 | 目錄 | 大小 |
@@ -102,9 +115,11 @@ minmaxm3/
 ├── download_models.py    # 下載 44GB 官方模型（跨平台）
 ├── start.bat             # Windows 啟動
 ├── start.sh              # Linux/macOS 啟動
-├── workflows/
-│   ├── 烽火邊關_H3_t2v.json      # 文生影片範例
-│   └── 影片放大_upscale_2x.json  # 影片放大範例（RealESRGAN 2x）
+├── workflows/                        # 範例工作流程（見下表）
+│   ├── 烽火邊關_H3_t2v.json
+│   ├── 圖生影片_i2v.json
+│   ├── 影片接續生成_i2v_continuation.json
+│   └── 影片放大_upscale_2x.json
 └── ComfyUI/              # (git 忽略) 由 setup 腳本產生
 ```
 
